@@ -4,6 +4,7 @@ from aiogram.filters import Command
 from kb import keyboard, keyboard2
 from aiogram import Dispatcher, Bot
 
+
 router = Router()
 dp = Dispatcher()
 
@@ -14,10 +15,8 @@ async def start_handler(msg: Message):
 
 @router.callback_query()
 async def process_callback_button(callback_query: types.CallbackQuery):
-    if callback_query.data == "1":
-        await callback_query.message.answer("test")
-    if callback_query.data == "2":
+    if callback_query.data == "next":
          await callback_query.message.edit_reply_markup(reply_markup=keyboard2)
-    if callback_query.data == "4":
+    if callback_query.data == "back":
          await callback_query.message.edit_reply_markup(reply_markup=keyboard)
 
