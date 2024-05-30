@@ -1,22 +1,17 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from text import URL_START, URL_TAXES
+from text import URL_START, URL_TAXES, URL_PAY, URL_MAP
 
-keyboard_bt_help_1 = InlineKeyboardButton(text='Как начать работу в приложении', url=URL_START)
-keyboard_bt_next = InlineKeyboardButton(text='-->', callback_data='next')
-keyboard_bt_help_2 = InlineKeyboardButton(text='Как платить налоги и взносы',  url=URL_TAXES)
-keyboard_bt_back = InlineKeyboardButton(text='<--', callback_data='back')
 
-markup = [
-    [keyboard_bt_help_1],
-    [keyboard_bt_next],
+"""Клавиатура частых вопросов"""
+keyboard_bt_help_1 = InlineKeyboardButton(text='Работа в приложении', url=URL_START)
+keyboard_bt_help_2 = InlineKeyboardButton(text='Налоги и взносы',  url=URL_TAXES)
+keyboard_bt_help_3 = InlineKeyboardButton(text='Подключение оплаты на сайте',  url=URL_PAY)
+keyboard_bt_help_4 = InlineKeyboardButton(text='Перевод за границу',  url=URL_MAP)
+keyboard_bt_help_5 = InlineKeyboardButton(text="")
 
+markup_help = [
+    [keyboard_bt_help_1, keyboard_bt_help_2],
+    [keyboard_bt_help_3, keyboard_bt_help_4],
 ]
 
-markup2 = [
-
-    [keyboard_bt_help_2],
-    [keyboard_bt_back]
-]
-
-keyboard = InlineKeyboardMarkup(inline_keyboard=markup)
-keyboard2 = InlineKeyboardMarkup(inline_keyboard=markup2)
+keyboard_help = InlineKeyboardMarkup(inline_keyboard=markup_help)
