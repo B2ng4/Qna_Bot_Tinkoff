@@ -27,8 +27,8 @@ async def Generate_answer(msg: types.Message):
     await bot.send_sticker(msg.chat.id, STICKER_WAIT)
     text = msg.text
     response = find_most_similar_title(text)
-    await msg.answer(response[0])
-    await msg.answer(response[1])
+    await msg.answer("🔖" + response[0])
+    await msg.answer("🔗"+ response[1])
     await msg.answer(Ganswer(text))
     await msg.answer("📌 Ты можешь задать еще вопрос", reply_markup=keyboard_help)
 
