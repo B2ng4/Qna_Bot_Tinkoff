@@ -7,6 +7,7 @@ from gigachat_answers import Ganswer
 from config import STICKER_START, STICKER_WAIT
 from exctract_json import find_most_similar_title
 import config
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 router = Router()
 bot = Bot(token=config.BOT_TOKEN)
@@ -14,7 +15,7 @@ bot = Bot(token=config.BOT_TOKEN)
 @router.message(Command("start"))
 async def start_handler(msg: types.Message):
     await bot.send_sticker(msg.chat.id, STICKER_START)
-    await msg.answer(START_MESSAGE, reply_markup=keyboard_help)
+    await msg.answer(START_MESSAGE)
 
 
 @router.message(Command("help"))
@@ -27,8 +28,11 @@ async def Generate_answer(msg: types.Message):
     await bot.send_sticker(msg.chat.id, STICKER_WAIT)
     text = msg.text
     response = find_most_similar_title(text)
-    await msg.answer("🔖" + response[0])
-    await msg.answer("🔗"+ response[1])
-    await msg.answer(Ganswer(text))
-    await msg.answer("📌 Ты можешь задать еще вопрос", reply_markup=keyboard_help)
+    keyboard_bt_answer = InlineKeyboardButton(text='Тут находится ответ', url=response[1])
+    markup = [
+            [keyboard_bt_answer],
+    ]
+    keyboard = InlineKeyboardMarkup(inline_keyboard=markup)
+    await msg.answer(f"\n{Ganswer(text)}", reply_markup=keyboard)
+    await msg.answer("📌 Ты можешь задать еще вопрос, если что-то непонятно /help")
 
